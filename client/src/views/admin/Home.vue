@@ -18,9 +18,6 @@
 </template>
 
 <script>
-// import { mapGetters, mapState } from 'vuex'
-// import axios from 'axios'
-
 export default {
   name: 'Home',
   data: function() {
@@ -37,12 +34,6 @@ export default {
 
   },
   computed: {
-    // ...mapState([
-    //   'reviews',
-    // ]),
-    // ...mapGetters([
-    //   'setToken',
-    // ])
   }
 }
 </script>
@@ -79,13 +70,13 @@ export default {
   animation: bounce .1s ease infinite alternate;
 }
 
-/* 뛰어다니는 싸집이 */
+/* 뛰어다니는 모션 */
 .stage {
     display: flex;
     height: 330px;
 }
 
-/* 싸집이 크기 */
+/* 캐릭터 크기 */
 .box {
     align-self: flex-end;
     animation-duration: 2s;

@@ -27,8 +27,6 @@
 <script>
 import axios from 'axios'
 
-// const SERVER_URL = process.env.VUE_APP_SERVER_URL
-
 export default {
   name: 'Login',
   data: function () {
@@ -57,47 +55,31 @@ export default {
       })
         .then(res => {
           this.username = this.credentials.username
-          console.log('dddd'+this.username)
           this.$store.commit('getUserName', this.username);
-          console.log(res)
           localStorage.setItem('jwt', res.data.token)
           this.token = res.data.token
           this.$emit('login')
-          // this.$emit('getToken', this.token)
           
           axios({
             method: 'get',
             url: `http://127.0.0.1:8000/accounts/${this.username}/`,
             headers: this.setToken(res.data.token)
-            // data: this.credentials,
           })
             .then(res => {
               
               this.users = res.data.users
               this.$store.commit('getUsers',this.users);
-              
               this.$store.commit('getToken',this.token);
-              // this.$emit('getUsers', this.users)
-              console.log(res.data)
 
               if (res.data.is_admin){
                 this.$router.push('/admin')
               } else {
                 this.$router.push('/home')
               }
-
-
-              // this.getUsers()
-              // localStorage.setItem('jwt', res.data.token)
-              
-              
-              // this.$router.push({ name: 'TodoList' })
             })
             .catch(err => {
               console.log(err)
             })
-          
-          // this.$router.push({ name: 'TodoList' })
         })
         .catch(err => {
           console.log(err)
@@ -109,15 +91,10 @@ export default {
         method: 'get',
         url: 'http://127.0.0.1:8000/accounts/userlist/',
         headers: this.setToken(this.token)
-        // data: this.credentials,
       })
         .then(res => {
           console.log('ddd'+res)
-          // getUsers()
-          // localStorage.setItem('jwt', res.data.token)
           this.$emit('login')
-          
-          // this.$router.push({ name: 'TodoList' })
         })
         .catch(err => {
           console.log(err)

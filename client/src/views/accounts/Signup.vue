@@ -108,19 +108,6 @@
         </div>
       </div>
     </div>
-    <!-- <div>
-      <span for="username">사용자 이름: </span>
-      <input type="text" id="username" v-model="credentials.username">
-    </div>
-    <div>
-      <span for="password">비밀번호: </span>
-      <input type="password" id="password" v-model="credentials.password">
-    </div>
-    <div>
-      <span for="passwordConfirmation">비밀번호 확인: </span>
-      <input type="password" id="passwordConfirmation" v-model="credentials.passwordConfirmation">
-    </div>
-    <button @click="signup(credentials)">회원가입</button> -->
   </div>
 </template>
 
@@ -128,8 +115,6 @@
 import axios from 'axios'
 import * as EmailValidator from 'email-validator';
 import PV from 'password-validator';
-
-// const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'Signup',
@@ -331,11 +316,6 @@ input:focus {
   margin-right: 20px;
 }
 
-/* 비밀번호 입력칸 */
-.password-input {
-  /* margin-right: 250px; */
-}
-
 /* 비밀번호 확인 입력칸 */
 .password-confirm-input {
   margin-right: 240px;
@@ -360,18 +340,6 @@ input:focus {
   font-size: 15px;
   color: black;
 }
-/* 이름 입력칸 */
-/* .name-input {
-  border: none;
-  margin: 20px auto;
-  padding: 0 20px;
-  height: 40px;
-
-  background: #F0E9CC;
-  border-radius: 0.5rem;
-  font-size: 25px;
-  color: black;
-} */
 
 /* 전화번호 입력칸 */
 .phone-input {

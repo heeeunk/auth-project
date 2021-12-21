@@ -15,12 +15,6 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.http.response import JsonResponse
 
-
-
-
-
-
-
 @api_view(['POST'])
 def signup(request):
 	# clietn 요청에서 data를 맏아 담아준다.
@@ -49,10 +43,6 @@ def signup(request):
 def user(request, username):    
     person = get_object_or_404(get_user_model(), username=username)
     users = get_user_model().objects.all()
-
-        # Set your variables here
-    # email = person.email
-    # email_hash = hashlib.md5(request.user.email.encode('utf-8').strip().lower()).hexdigest() #gravatar hash 
     context ={
         'username': person.username,
         'email': person.email,

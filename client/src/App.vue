@@ -10,7 +10,7 @@
       <div v-else>
         <div class="greeting" style="display:inline-block;">
           로그인을 해주세요.
-          <router-link @click.native="logout" to="#" class="logout">Logout</router-link>
+          <!-- <router-link @click.native="logout" to="#" class="logout">Logout</router-link> -->
         </div>
       </div>
     </div>
@@ -19,12 +19,9 @@
 </template>
 
 <script>
-// import Login from './views/accounts/Login.vue'
-
 export default {
   name: 'App',
   components: {
-    // Login,
   },
   data: function () {
     return {

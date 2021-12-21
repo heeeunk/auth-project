@@ -28,16 +28,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    createTodo: function ({ commit }, todoItem) {
-      // context.commit('CREATE_TODO', todoItem)
-      commit('CREATE_TODO', todoItem)
-    },
-    deleteTodo: function ({ commit }, todoItem) {
-      commit('DELETE_TODO', todoItem)
-    },
-    updateTodo: function ({ commit }, todoItem) {
-      commit('UPDATE_TODO', todoItem)
-    },
   },
   getters: {
 

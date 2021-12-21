@@ -6,15 +6,15 @@
 
 ### 사용 기술
 
-[백엔드] Django, Django Rest Framework, mySQL  (암호화)Salt
+[백엔드] Django, Django Rest Framework
 
-[프론트엔드] Vue
+[프론트엔드] Vue, Vuex
 
 [데이터베이스] MySQL 
 
-[참고]https://dora-guide.com/mysql-insert-update-delete/
 
-#### 
+
+
 
 ### 요구사항 정의
 
@@ -47,22 +47,41 @@
 
 * 유저 전체정보 가져오기
 
+
+==아래 사항은 현재 추가중
+
 * 비밀번호는 암호화되어 보이기. 비밀번호 초기화
 
 * 유저 추가
 
 * 유저 삭제
 
+  ​
 
-[table]
-
-username, user_id, password, is_superuser, created_at, updated_at
 
 [추가사항]
 
 이메일 인증
 
 비밀번호 찾기
+
+
+
+### 아키텍쳐
+
+![아키텍쳐](./assets/architecture.png)
+
+### User Table
+
+| column    | content                 |
+| --------- | ----------------------- |
+| id        | 자동 부여 고유값               |
+| username  | 아이디                     |
+| password  | 비밀번호 ( 암호화)             |
+| phone     | 전화번호                    |
+| email     | 이메일                     |
+| is_admin  | 관리자 여부                  |
+| is_active | 활성화 여부 (탈퇴시 deactivate) |
 
 
 
@@ -74,9 +93,11 @@ username, user_id, password, is_superuser, created_at, updated_at
 
 
 
+### 메인화면
+
+![login](./assets/login.png)
 
 
 
-
-
+[참고]https://dora-guide.com/mysql-insert-update-delete/
 

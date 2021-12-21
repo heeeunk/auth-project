@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import TodoList from '@/views/todos/TodoList'
-import CreateTodo from '@/views/todos/CreateTodo'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import Admin from '@/views/admin/Admin'
@@ -30,19 +28,6 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-
-  {
-    path: '/todos',
-    name: 'TodoList',
-    component: TodoList,
-  },
-  {
-    path: '/todos/create',
-    name: 'CreateTodo',
-    component: CreateTodo,
-  },
-
-
 ]
 
 const router = new VueRouter({

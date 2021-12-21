@@ -23,8 +23,6 @@
 </template>
 
 <script>
-// import { mapGetters, mapState } from 'vuex'
-// import axios from 'axios'
 
 export default {
   name: 'Admin',
@@ -33,28 +31,10 @@ export default {
       users: this.$store.state.users,
     }
   },
-
-  methods: {
-  
-    
-  },
-  created: function () {
-
-  },
-  computed: {
-    // ...mapState([
-    //   'reviews',
-    // ]),
-    // ...mapGetters([
-    //   'setToken',
-    // ])
-  }
 }
 </script>
 
 <style>
-
-
 .styled-table {
   margin-top:30vh;
   border-collapse: collapse;
