@@ -2,19 +2,23 @@
   <div style="display:flex; justify-content:center; justify-align:center;">
     <table class="styled-table">
       <thead>
-          <tr>
-              <th>아이디</th>
+          <tr >
+              <th style="text-align:center">아이디</th>
               <th>전화번호</th>
               <th>이메일</th>
               <th>관리자여부</th>
           </tr>
       </thead>
       <tbody>
-         <tr v-for="(user, idx) in users" :key="idx" @click="selectReview(review)"  style="font-family: 'Jua', sans-serif; font-size: 20px;">
+         <tr v-for="(user, idx) in users" :key="idx" style="font-size: 20px;">
           <td>{{ user.username }}</td>
           <td>{{ user.phone }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.is_admin }}</td>
+          <!-- <td>{{ user.is_admin }}</td> -->
+          <td>
+            <input type="checkbox" :id="'check'+idx" @click="checkBox(idx)" v-model="user.is_admin" >
+            <label ></label>
+          </td>
         </tr>
 
       </tbody>
@@ -31,6 +35,12 @@ export default {
       users: this.$store.state.users,
     }
   },
+  methods: {
+    checkBox(idx){
+      const box = document.getElementById = `check${idx}`
+      console.log(box)
+    }
+  }
 }
 </script>
 
@@ -42,12 +52,12 @@ export default {
   font-family: sans-serif;
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
 .styled-table thead tr {
     background-color: #e4cd4b;
     color: #523d10;
-    text-align: left;
 }
 
 .styled-table th,
