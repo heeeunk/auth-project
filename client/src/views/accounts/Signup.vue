@@ -2,7 +2,6 @@
   <div>
     <div class="">
     <img src="@/assets/background2.png" class="background-img-item"/>
-
       <div class="join-container">
         <p class="account-title">회원가입</p>
         <!-- 아이디 -->
@@ -88,10 +87,10 @@
           <br />
           <br />
         </div>
-        <h6 v-if="error.email == 'styleError'" class="account-warning" style="color:red">
+        <h6 v-if="error.email == 'styleError'" class="email-warning" style="color:red">
           이메일 형식이 일치하지 않습니다.
         </h6>
-        <h6 v-if="error.email == 'lengthError'" class="account-warning" style="color:red">
+        <h6 v-if="error.email == 'lengthError'" class="email-warning" style="color:red">
           이메일은 최대 30자 이상이어야 합니다.
         </h6>
 
@@ -165,54 +164,39 @@ export default {
       this.isSubmit = false;
       // 이름의 길이가 1자 이상, 3자 이하인가?
       if (this.credentials.username.length <= 0 || this.credentials.username.length > 3) {
-        console.log('ddd')
         this.error.username = 'notValid';
         return;
-      }
-      // 이름 확인 통과
-      else this.error.username = true;
+      } else this.error.username = true;
 
        // 비밀번호가 적합한가?
-      if (!this.passwordSchema.validate(this.credentials.userPassword)) {
-        this.error.userPassword = 'notValid';
+      if (!this.passwordSchema.validate(this.credentials.password)) {
+        this.error.password = 'notValid';
         return;
-      }
-      // 비밀번호 체크 통과
-      else this.error.userPassword = true;
+      } else this.error.password = true;
 
       // 비밀번호 확인
-      if (this.credentials.userPassword != this.credentials.userPasswordConfirm) {
-        this.error.userPasswordConfirm = 'notSame';
+      if (this.credentials.passwordConfirmation.length > 0 && this.credentials.password != this.credentials.passwordConfirmation) {
+        this.error.passwordConfirmation = 'notSame';
         return;
-      }
-      // 비밀번호 확인 통과
-      else this.error.userPasswordConfirm = true;
+      } else this.error.passwordConfirmation = true;
 
       // 이메일 형식이 맞는가?
       if (!EmailValidator.validate(this.credentials.email)) {
         this.error.email = 'styleError';
         return;
       }
+
       // 이메일 길이가 1글자 이상, 40글자 미만인가?
       else if (this.credentials.email.length <= 0 || this.credentials.email.length >= 40) {
         this.error.email = 'lengthError';
         return;
-      }
-      // 이메일 체크 통과
-      else this.error.email = true;
-
-     
-
-      
+      } else this.error.email = true;
 
       // 전화번호
-      if (this.credentials.userNumber.length != 11 || this.credentials.userNumber.slice(0, 3) != '010') {
-        this.error.userNumber = 'notValid';
+      if (this.credentials.phone.length != 11 || this.credentials.phone.slice(0, 3) != '010') {
+        this.error.phone = 'notValid';
         return;
-      }
-      // 전화번호 확인 통과
-      else this.error.userNumber = true;
-
+      } else this.error.phone = true;
 
       this.isSubmit = true;
     },
@@ -236,7 +220,6 @@ export default {
     },
   },
   created() {
-  this.logined();
   // 패스워드 규칙. 최소 8자 ~ 최대 100자. 숫자와 문자 포함해야함.
   this.passwordSchema
     .is()
@@ -315,6 +298,7 @@ input:focus {
 .email-input {
   margin-right: 20px;
 }
+
 
 /* 비밀번호 확인 입력칸 */
 .password-confirm-input {
@@ -410,14 +394,14 @@ input:focus {
 /* 계정 경고 메시지 */
 .account-warning {
   position: absolute;
-  margin-top: -35px;
+  margin-top: -10px;
   margin-left: 270px;
 }
 
 /* 계정 경고 메시지 */
 .password-confirm-warning {
   position: absolute;
-  margin-top: -53px;
+  margin-top: -20px;
   margin-left: 270px;
 }
 
@@ -436,10 +420,10 @@ input:focus {
 }
 
 /* 기수 경고 메시지 */
-.term-warning {
+.email-warning {
   position: absolute;
   margin-top: -30px;
-  margin-left: 61px;
+  margin-left: 250px;
 }
 
 .account-title {

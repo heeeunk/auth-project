@@ -15,17 +15,24 @@ export default new Vuex.Store({
   },
   mutations: {
     getUsers: function(state, payload) {
-        return state.users = payload
+      return state.users = payload
+    },
+    removeUsers: function(state){
+      return state.users = ''
     },
     getToken: function(state, payload) {
-        return state.token = payload
+      return state.token = payload
     },
     removeToken: function(state){
-        return state.token = ''
+      state.token = ''
+      state.username=''
+      state.users = ''
+      return
     },
     getUserName: function(state, payload) {
-        return state.username=payload
-    }
+      return state.username=payload
+    },
+
   },
   actions: {
   },

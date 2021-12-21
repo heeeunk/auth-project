@@ -10,7 +10,6 @@
       <div v-else>
         <div class="greeting" style="display:inline-block;">
           로그인을 해주세요.
-          <!-- <router-link @click.native="logout" to="#" class="logout">Logout</router-link> -->
         </div>
       </div>
     </div>
@@ -32,6 +31,7 @@ export default {
     logout: function () {
       this.isLogin = false
       localStorage.removeItem('jwt')
+      this.$store.commit('removeToken');
       this.$router.push({ name: 'Login' })
     },
   },

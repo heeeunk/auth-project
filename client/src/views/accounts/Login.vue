@@ -35,8 +35,8 @@ export default {
         username: null,
         password: null,
       },
-      username:'',
-      token:'',
+      username: this.$store.username,
+      token: this.$store.token,
       users:[],
     }
   },
@@ -57,7 +57,7 @@ export default {
           this.username = this.credentials.username
           this.$store.commit('getUserName', this.username);
           localStorage.setItem('jwt', res.data.token)
-          this.token = res.data.token
+          this.$store.commit('getToken',res.data.token);
           this.$emit('login')
           
           axios({
@@ -66,13 +66,11 @@ export default {
             headers: this.setToken(res.data.token)
           })
             .then(res => {
-              
-              this.users = res.data.users
-              this.$store.commit('getUsers',this.users);
-              this.$store.commit('getToken',this.token);
-
+              // 로그인한 유저가 관리자인 경우
               if (res.data.is_admin){
+                this.$store.commit('getUsers',res.data.users);
                 this.$router.push('/admin')
+                // 일반 유저인 경우
               } else {
                 this.$router.push('/home')
               }
@@ -87,15 +85,15 @@ export default {
     },
     getUsers: function(){
       console.log('ddddd')
+      console.log('this.token')
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/accounts/userlist/',
         headers: this.setToken(this.token)
       })
-        .then(res => {
-          console.log('ddd'+res)
+        .then(
           this.$emit('login')
-        })
+        )
         .catch(err => {
           console.log(err)
         })
@@ -103,10 +101,6 @@ export default {
     goSignup: function(){
       this.$router.push('/signup')
     },
-    go: function(){
-      this.$emit('getToken', this.token)
-
-    }
   }
 }
   
