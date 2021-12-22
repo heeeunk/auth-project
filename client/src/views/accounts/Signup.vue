@@ -162,8 +162,8 @@ export default {
     checkform() {
       console.log(this.credentials)
       this.isSubmit = false;
-      // 이름의 길이가 1자 이상, 3자 이하인가?
-      if (this.credentials.username.length <= 0 || this.credentials.username.length > 3) {
+      // 이름의 길이가 1자 이상, 20자 이하인가?
+      if (this.credentials.username.length <= 0 || this.credentials.username.length > 20) {
         this.error.username = 'notValid';
         return;
       } else this.error.username = true;

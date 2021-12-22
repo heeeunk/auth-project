@@ -14,6 +14,8 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.http.response import JsonResponse
+from json import JSONEncoder
+
 
 @api_view(['POST'])
 def signup(request):
@@ -40,7 +42,7 @@ def signup(request):
 @api_view(['get'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
-def user(request, username):    
+def getUser(request, username):    
     person = get_object_or_404(get_user_model(), username=username)
     users = get_user_model().objects.all()
     context ={
@@ -67,42 +69,50 @@ def user(request, username):
 #     }
 #     return JsonResponse(context)
 
-# @api_view(['GET'])
-# def login(request):
-#     username = request.data.get('username')
-#     password = request.data.get('password')
-#     user = User.objects.get(username=username)
-#     return Response({
-#             'response': 'success',
-#             'message': 'sucess login',
-#             'user': user
-#         })
+@api_view(['POST'])
+def login(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = get_object_or_404(get_user_model(), username=username)
+    # user = get_user_model().object.get(username=username)
+    context = {
+        'response': 'success',
+        'message': 'sucess login',
+        'user': user,
+        'token': jwt_create(username)
+    }
+    return JsonResponse(EmployeeEncoder().encode(context), safe=False)
 
-#     # if check_password(password, user.password):
-#     #     jwt_token = jwt_create(username)
-#     #     cache.set('jwttoken', jwt_token)
-#     #     response = Response({
-#     #         'response': 'success',
-#     #         'message': 'sucess login',
-#     #         'user': user
-#     #     })
-#     #     response.set_cookie('jwttoken', jwt_token)
-#     #     return response
-#     # else:
-#     #     return Response({
-#     #         'response': 'error',
-#     #         'message': 'password is wrong'
-#     #     })
+    # if check_password(password, user.password):
+    #     jwt_token = jwt_create(username)
+    #     cache.set('jwttoken', jwt_token)
+    #     response = Response({
+    #         'response': 'success',
+    #         'message': 'sucess login',
+    #         'user': user
+    #     })
+    #     response.set_cookie('jwttoken', jwt_token)
+    #     return response
+    # else:
+    #     return Response({
+    #         'response': 'error',
+    #         'message': 'password is wrong'
+    #     })
 
 
-# def jwt_create(username):
-#     now = datetime.now()
-#     key = settings.SECRET_KEY
-#     now_time = str(now.year)+str(now.month)+str(now.day) + \
-#         str(now.hour)+str(now.minute)+str(now.second)
-#     payload = {
-#         "username": username,
-#         "now_time": now_time
-#     }
-#     jwt_token = jwt.encode(payload, key, algorithm='HS256').decode('utf-8')
-#     return jwt_token
+def jwt_create(username):
+    now = datetime.now()
+    key = settings.SECRET_KEY
+    now_time = str(now.year)+str(now.month)+str(now.day) + \
+        str(now.hour)+str(now.minute)+str(now.second)
+    payload = {
+        "username": username,
+        "now_time": now_time
+    }
+    jwt_token = jwt.encode(payload, key, algorithm='HS256').decode('utf-8')
+    return jwt_token
+
+# subclass JSONEncoder
+class EmployeeEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__

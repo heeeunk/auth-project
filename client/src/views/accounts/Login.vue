@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login-container">
-      <img src="@/assets/logo.png" alt="ssazip-login-img" />
+      <img src="@/assets/logo.png" alt="logo-img" />
       <p></p>
       <input type="text" name="userId" id="username" placeholder="ID" v-model="credentials.username">
       <input
@@ -20,7 +20,6 @@
       </router-link>
     </div>
     <img src="@/assets/background2.png" class="background-img-item"/>
-
   </div>
 </template>
 
@@ -50,20 +49,23 @@ export default {
     login: function () {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:8000/accounts/api-token-auth/',
+        url: 'http://127.0.0.1:8000/accounts/login/',
         data: this.credentials,
       })
         .then(res => {
-          this.username = this.credentials.username
-          this.$store.commit('getUserName', this.username);
-          localStorage.setItem('jwt', res.data.token)
-          this.$store.commit('getToken',res.data.token);
+          const data=JSON.parse(res.data)
+          const username = data.user.username
+          const token = data.token
+          this.username = username
+          this.$store.commit('getUserName', username);
+          this.$store.commit('getToken', token);
+          localStorage.setItem('jwt', token)
           this.$emit('login')
           
           axios({
             method: 'get',
             url: `http://127.0.0.1:8000/accounts/${this.username}/`,
-            headers: this.setToken(res.data.token)
+            headers: this.setToken(token)
           })
             .then(res => {
               // 로그인한 유저가 관리자인 경우
@@ -106,64 +108,35 @@ export default {
   
 </script>
 <style scoped>
+/* 로그인 투명 컨테이너 내부 */
 .login-container {
   background-color: rgb(240, 240, 248, 0.2);
   width: 500px;
   padding: 10px 0px;
   display: inline-block;
   border-radius: 30px;
-  margin-top: 11vh;
+  margin-top: 17vh;
 } 
-
 .login-container > input {
   width: 250px;
-}
-
-.login-container > img {
-  width: 250px;
-  margin-top: 30px;
-}
-
-.background-img {
-  position: absolute;
-  left: 0;
-  height: 0;
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-}
-
-.login {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-}
-
-
-
-
-
-.login > div > input, .login > div > input > img {
+  outline-color: #ebb34b;
   display: block;
-}
-
-.login > div > input {
   border: none;
   margin: 20px auto;
   padding: 0 20px;
   height: 40px;
-
   background: #F0E9CC;
   border-radius: 20px;
   font-size: 25px;
   color: black;
 }
-
-.login > div > input:focus {
-  outline: none;
+.login-container > img {
+  width: 250px;
+  margin-top: 30px;
 }
 
-.login .button-login, .login .button-cancel {
+/* 버튼 */
+.button-login, .button-cancel {
   border: none;
   border-radius: 20px;
   font-size: 20px;
@@ -172,8 +145,19 @@ export default {
   height: 40px;
   cursor: pointer;
   margin: 0 20px;
+  box-shadow: 1px 4px 0 rgb(0,0,0,0.5)
 }
- .login .button-signup {
+.button-login:active { 
+  box-shadow: 1px 1px 0 rgb(0,0,0,0.5); 
+  position: relative; 
+  top:2px; 
+}
+.button-cancel:active { 
+  box-shadow: 1px 1px 0 rgb(0,0,0,0.5); 
+  position: relative; 
+  top:2px; 
+}
+ .button-signup {
    border: none;
     border-radius: 20px;
     font-size: 20px;
@@ -182,22 +166,25 @@ export default {
     height: 40px;
     margin: 20px 0;
     margin-bottom: 40px;
+    cursor: pointer;
+    background: #9EACDD;
+    box-shadow: 1px 4px 0 rgb(0,0,0,0.5)
  }
-
+ .button-signup:active { 
+  box-shadow: 1px 1px 0 rgb(0,0,0,0.5); 
+  position: relative; 
+  top:2px; 
+ }
 .button-login {
   background: #EAC16F;
 }
-
 .button-cancel {
   background: #CD5069;
   color: white;
   
 }
 
-.login > div > a > .button-signup {
-  background: #9EACDD;
-}
-
+/* 배경에 캐릭터 이미지 */
 .background-img-item {
   position: absolute;
   bottom:0px;

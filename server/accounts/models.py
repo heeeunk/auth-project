@@ -1,15 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from phonenumber_field.modelfields import PhoneNumberField
 
 class UserManager(BaseUserManager):
     # 일반 user 생성
     def create_user(self, email, phone, username, password=None):
         if not email:
-            raise ValueError('must have user email')
+            raise ValueError('no user email')
         if not phone:
-            raise ValueError('must have user phone')
+            raise ValueError('no user phone')
         if not username:
-            raise ValueError('must have user username')
+            raise ValueError('no user username')
         user = self.model(
             email = self.normalize_email(email),
             phone = phone,
@@ -29,28 +30,25 @@ class UserManager(BaseUserManager):
             phone = phone,
             username = username
         )
-        user.is_admin = True
+        user.is_admin = 1
         user.save(using=self._db)
         return user
 
 class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
-    email = models.EmailField(default='', max_length=100, null=False, blank=False, unique=True)
-    phone = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
-    username = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
-    
-    # User 모델의 필수 field
-    is_active = models.BooleanField(default=True)    
-
-    is_admin = models.BooleanField(default=False)
+    username = models.CharField(default='', max_length=20, null=False, blank=False, unique=True)
+    email = models.EmailField(default='', max_length=255, null=False, blank=False, unique=True)
+    phone = PhoneNumberField(default='', max_length=12, null=False, blank=False, unique=True)
+    is_active = models.IntegerField(default=0)    
+    is_admin = models.IntegerField(default=0)
     
     # 헬퍼 클래스 사용
     objects = UserManager()
 
-    # 사용자의 username field는 nickname으로 설정
+    # 사용자의 username field는 username으로 설정
     USERNAME_FIELD = 'username'
     # 필수로 작성해야하는 field
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['password', 'email', 'phone']
 
     def __str__(self):
         return self.username

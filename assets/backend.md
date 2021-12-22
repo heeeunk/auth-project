@@ -1,21 +1,36 @@
-### 1. 회원가입 기능
+###
+
+### 2. 로그인 기능
 
 #### [백엔드]
 
+[내장 기능으로 구현법]
 
+🌷 Django 에는 obtain_jwt_token 이라는 jwt를 자동 생성해서 보내주는 기능이 있다.
+
+```python
+from rest_framework_jwt.views import obtain_jwt_token
+from django.urls import path
+from . import views
+
+path('api-token-auth/', obtain_jwt_token),
+
+```
+
+
+
+[직접 구현]
+
+🌻 내장 기능 구현 대신 직접 jwt 를 생성하고 원하는 정보를 보내줄 수 있도록 만들어보았다.
 
 > urls.py
 
 ```python
-from rest_framework_jwt.views import obtain_jwt_token
-
 from django.urls import path
 from . import views
 
-
 urlpatterns = [
-    path('signup/', views.signup),
-    path('api-token-auth/', obtain_jwt_token),
+    path('login/', views.login),
 ]
 
 ```

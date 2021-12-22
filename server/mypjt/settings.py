@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'accounts',
     'rest_framework',
+    'phonenumber_field',
     # django cors
     'corsheaders',
     'django.contrib.admin',
