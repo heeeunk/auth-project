@@ -53,6 +53,7 @@ export default {
         data: this.credentials,
       })
         .then(res => {
+          console.log(res.data)
           const data=JSON.parse(res.data)
           const username = data.user.username
           const token = data.token
@@ -86,8 +87,6 @@ export default {
         })
     },
     getUsers: function(){
-      console.log('ddddd')
-      console.log('this.token')
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/accounts/userlist/',

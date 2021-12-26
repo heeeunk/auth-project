@@ -8,7 +8,7 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.core.cache import cache
-from django.contrib.auth import get_user, get_user_model
+from django.contrib.auth import authenticate, get_user, get_user_model
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -40,10 +40,8 @@ def signup(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['get'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def getUser(request, username):    
-    person = get_object_or_404(get_user_model(), username=username)
+    person = get_user_model().objects.get(username=username)
     users = get_user_model().objects.all()
     context ={
         'username': person.username,
@@ -68,19 +66,42 @@ def getUser(request, username):
 #         # 'email_hash':email_hash,
 #     }
 #     return JsonResponse(context)
+@api_view(['POST'])
+def changeAdmin(request, username):
+    user = get_user_model().objects.get(username=username)
+    if user.is_admin:
+        user.is_admin = 0
+        user.save()
+    else:
+        user.is_admin = 1
+        user.save()
+    context = {
+        'response' : 'success',
+        'status' : user.is_admin,
+    }
+    return JsonResponse(context)
 
 @api_view(['POST'])
 def login(request):
     username = request.data.get('username')
     password = request.data.get('password')
-    user = get_object_or_404(get_user_model(), username=username)
-    # user = get_user_model().object.get(username=username)
-    context = {
-        'response': 'success',
-        'message': 'sucess login',
-        'user': user,
-        'token': jwt_create(username)
-    }
+    # user = get_object_or_404(get_user_model(), username=username)
+    user = get_user_model().objects.get(username=username)
+
+    # auth = authenticate(username=username, password=password)
+    if check_password(password, user.password):
+        context = {
+            'response': 'success',
+            'message': 'sucess login',
+            'user': user,
+            'token': jwt_create(username)
+        }
+
+    else:
+        context = {
+            'response': 'fail',
+            'message': "password doesn't match",
+        }
     return JsonResponse(EmployeeEncoder().encode(context), safe=False)
 
     # if check_password(password, user.password):

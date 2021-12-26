@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from phonenumber_field.modelfields import PhoneNumberField
+# from phonenumber_field.modelfields import PhoneNumberField
 
 class UserManager(BaseUserManager):
     # 일반 user 생성
@@ -38,7 +38,7 @@ class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     username = models.CharField(default='', max_length=20, null=False, blank=False, unique=True)
     email = models.EmailField(default='', max_length=255, null=False, blank=False, unique=True)
-    phone = PhoneNumberField(default='', max_length=12, null=False, blank=False, unique=True)
+    phone = models.IntegerField(default='', null=False, blank=False, unique=True)
     is_active = models.IntegerField(default=0)    
     is_admin = models.IntegerField(default=0)
     

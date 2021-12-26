@@ -14,9 +14,8 @@
           <td>{{ user.username }}</td>
           <td>{{ user.phone }}</td>
           <td>{{ user.email }}</td>
-          <!-- <td>{{ user.is_admin }}</td> -->
           <td>
-            <input type="checkbox" :id="'check'+idx" @click="checkBox(idx)" v-model="user.is_admin" >
+            <input type="checkbox" :id="'check'+idx" @click="checkBox(user)" v-model="user.is_admin" >
             <label ></label>
           </td>
         </tr>
@@ -27,20 +26,41 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   name: 'Admin',
   data: function() {
     return {
       users: this.$store.state.users,
+      token: this.$store.token,
     }
   },
   methods: {
-    checkBox(idx){
-      const box = document.getElementById = `check${idx}`
-      console.log(box)
+    checkBox(user){
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/accounts/changeadmin/${user.username}/`,
+      })
+        .then(res => {  // eslint-disable-line no-unused-vars
+          alert('관리자가 변경되었습니다.')
+          axios({
+            method: 'get',
+            url: `http://127.0.0.1:8000/accounts/${this.username}/`,
+            headers: this.setToken(this.token)
+          })
+            .then(res => {
+              this.$store.commit('getUsers',res.data.users);
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
-  }
+  },
 }
 </script>
 

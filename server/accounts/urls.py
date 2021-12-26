@@ -7,4 +7,5 @@ urlpatterns = [
     path('signup/', views.signup),
     # path('api-token-auth/', obtain_jwt_token),
     path('<str:username>/', views.getUser, name='getUser'),
+    path('changeadmin/<str:username>/', views.changeAdmin, name='changeAdmin'),
 ]
