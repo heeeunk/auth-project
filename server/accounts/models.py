@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
     # 관리자 user 생성
     def create_superuser(self, email, username, phone=None, password=None):
         if phone is None:
-            phone = '등록요함'
+            phone = 0
         user = self.create_user(
             email,
             password = password,
@@ -38,7 +38,7 @@ class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     username = models.CharField(default='', max_length=20, null=False, blank=False, unique=True)
     email = models.EmailField(default='', max_length=255, null=False, blank=False, unique=True)
-    phone = models.IntegerField(default='', null=False, blank=False, unique=True)
+    phone = models.IntegerField(default=0, null=False, blank=False, unique=True)
     is_active = models.IntegerField(default=0)    
     is_admin = models.IntegerField(default=0)
     
@@ -52,13 +52,3 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.username
-
-    # def has_perm(self, perm, obj=None):
-    #     return True
-
-    # def has_module_perms(self, app_label):
-    #     return True
-
-    # @property
-    # def is_staff(self):
-    #     return self.is_admin

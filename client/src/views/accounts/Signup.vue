@@ -102,7 +102,6 @@
           <!-- 가입 버튼 -->
           <div>
             <button class="join-button" @click="signup(credentials)">회원가입</button>
-            <!-- <ButtonRound text="가입하기" /> -->
           </div>
         </div>
       </div>
@@ -151,17 +150,14 @@ export default {
           })
           .catch(err => {
             console.log(err)
-            console.log(err)
-
           })
       }else{
         alert('입력하신 비밀번호와 비밀번호 확인값이 다릅니다.')
       }
     },
     checkform() {
-      console.log(this.credentials)
       this.isSubmit = false;
-      // 이름의 길이가 1자 이상, 20자 이하인가?
+      // 아이디의 길이가 1자 이상, 20자 이하인가?
       if (this.credentials.username.length <= 0 || this.credentials.username.length > 20) {
         this.error.username = 'notValid';
         return;
@@ -185,13 +181,13 @@ export default {
         return;
       }
 
-      // 이메일 길이가 1글자 이상, 40글자 미만인가?
-      else if (this.credentials.email.length <= 0 || this.credentials.email.length >= 40) {
+      // 이메일 길이가 1글자 이상, 255글자이하이다.
+      else if (this.credentials.email.length <= 0 || this.credentials.email.length >= 255) {
         this.error.email = 'lengthError';
         return;
       } else this.error.email = true;
 
-      // 전화번호
+      // 전화번호양식
       if (this.credentials.phone.length != 11 || this.credentials.phone.slice(0, 3) != '010') {
         this.error.phone = 'notValid';
         return;
@@ -219,7 +215,7 @@ export default {
     },
   },
   created() {
-  // 패스워드 규칙. 최소 8자 ~ 최대 100자. 숫자와 문자 포함해야함.
+  // 패스워드 규칙. 최소 8자 ~ 최대 16자. 숫자와 문자 포함해야함.
   this.passwordSchema
     .is()
     .min(8)

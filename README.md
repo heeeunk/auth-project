@@ -28,137 +28,6 @@
 
 
 
-### 요구사항 정의
-
-[로그인 페이지]
-
-* 유저 아이디 입력칸, 비밀번호 입력 칸(data binding), 로그인 버튼, 회원가입버튼
-
-* 아이디 또는 비밀번호 틀릴 경우 틀렸다는 알림이 뜨도록한다.(프론트처리)
-
-* 비밀번호 입력시 로 보이지 않게 처리
-
-* 회원가입 버튼 클릭시 가입페이지로 이동.
-
-* 로그인 클릭시 로그인 성공페이지 띄우기
-
-  [로그인 성공페이지] : 스마일게이트 캐릭터들이 통통 뛰고 있기
-
-[회원가입 페이지]
-
-* 유저이름, 유저 아이디 입력창, 비밀번호 입력창, 비밀번호확인창, 회원가입버튼, 취소버튼
-* 아이디 조건, 비밀번호 조건 placeholder로 띄워놓기
-* 아이디와 비밀번호가 조건에 어긋나면 경고 문구뜨게 만들기
-* 회원가입 클릭시 회원가입 성공 문구 뜨고 로그인 페이지로 이동해달라는 문구뜸
-* 알림이후 로그인페이지로 이동
-
-[admin 페이지]
-
-* 관리자로 로그인할 경우 해당 페이지로 이동
-
-
-* 유저 전체정보 가져오기
-
-
-==아래 사항은 현재 추가중
-
-* 비밀번호는 암호화되어 보이기. 비밀번호 초기화
-
-* 유저 추가
-
-* 유저 삭제
-
-  
-
-
-[추가사항]
-
-이메일 인증
-
-비밀번호 찾기
-
-
-
-## 주요 기능
-
-1. 로그인 기능
-
-- 아이디와 패스워드를 입력해 로그인 할 수 있다.
-
-- 아이디 또는 비밀번호가 틀릴  경우에는 틀렸다는 알림이 뜨도록 한다.
-
-  ### 메인화면
-
-  ![login](./assets/login.png)
-
-  
-
-![1](./assets/회원가입.gif)
-
-1. 회원가입 기능
-2. 
-
-![1](./assets/일반로그인.gif)
-
-
-
-![1](./assets/관리자로로그인.gif)
-
-
-
-![2](./assets/관리자변경하기.gif)
-
-
-
-
-
-[로그인 페이지]
-
-- 유저 아이디 입력칸, 비밀번호 입력 칸(data binding), 로그인 버튼, 회원가입버튼
-
-- 아이디 또는 비밀번호 틀릴 경우 틀렸다는 알림이 뜨도록한다.(프론트처리)
-
-- 비밀번호 입력시 로 보이지 않게 처리
-
-- 회원가입 버튼 클릭시 가입페이지로 이동.
-
-- 로그인 클릭시 로그인 성공페이지 띄우기
-
-  [로그인 성공페이지] : 스마일게이트 캐릭터들이 통통 뛰고 있기
-
-[회원가입 페이지]
-
-- 유저이름, 유저 아이디 입력창, 비밀번호 입력창, 비밀번호확인창, 회원가입버튼, 취소버튼
-- 아이디 조건, 비밀번호 조건 placeholder로 띄워놓기
-- 아이디와 비밀번호가 조건에 어긋나면 경고 문구뜨게 만들기
-- 회원가입 클릭시 회원가입 성공 문구 뜨고 로그인 페이지로 이동해달라는 문구뜸
-- 알림이후 로그인페이지로 이동
-
-[admin 페이지]
-
-- 관리자로 로그인할 경우 해당 페이지로 이동
-
-
-- 유저 전체정보 가져오기
-
-==아래 사항은 현재 추가중
-
-- 비밀번호는 암호화되어 보이기. 비밀번호 초기화
-
-- 유저 추가
-
-- 유저 삭제
-
-  
-
-[추가사항]
-
-이메일 인증
-
-비밀번호 찾기
-
-
-
 ### 아키텍쳐
 
 ![아키텍쳐](./assets/architecture.png)
@@ -174,6 +43,121 @@
 | email     | 이메일                     |
 | is_admin  | 관리자 여부                  |
 | is_active | 활성화 여부 (탈퇴시 deactivate) |
+
+
+
+### 요구사항 정의
+
+> 모든 페이지는 새로고침을 최소화하도록 구현한다.
+
+[로그인 페이지]
+
+* 유저 아이디 입력칸, 비밀번호 입력 칸, 로그인 버튼, 회원가입버튼
+
+* 아이디 또는 비밀번호 틀릴 경우 틀렸다는 알림이 뜨도록한다.
+
+* 비밀번호 입력시 보이지 않게 처리
+
+* 회원가입 버튼 클릭시 가입페이지로 이동.
+
+* 로그인 클릭시 로그인 성공페이지로 이동
+
+  [로그인 성공페이지] : 스마일게이트 캐릭터들이 통통 뛰고 있는 페이지
+
+* 로그인에 성공하면 유저이름과 함께 환영문구가 뜨고 로그아웃 버튼이 생성된다.
+
+* 로그아웃 버튼 클릭시 로그아웃된다.
+
+[회원가입 페이지]
+
+* 유저이름, 유저 아이디 입력창, 비밀번호 입력창, 비밀번호확인창, 회원가입버튼
+* 아이디 조건, 비밀번호 조건 placeholder로 띄워놓기
+* 아이디와 비밀번호가 조건에 어긋나면 경고 문구 뜨게 만들기
+* 이메일과 번호가 양식에 맞지않는경우 경고 문구 뜨게 만들기
+* 모든 양식이 지켜지면 경고문구가 사라진다.
+* 회원가입 클릭시 회원가입 성공 문구 뜨고 로그인 페이지로 이동 알림 뜸
+* 알림이후 로그인페이지로 이동
+
+[admin 페이지]
+
+* 관리자로 로그인할 경우 해당 페이지로 이동
+
+
+* 유저 전체정보 가져오기
+* 유저를 관리자로 지정하거나 관리자 권한을 뺏기
+
+
+
+
+[추가사항]
+
+유저 추가 및 삭제 (필요시)
+
+이메일 인증
+
+비밀번호 찾기
+
+
+
+## 주요 기능
+
+### 1. 로그인 기능
+
+- 아이디와 패스워드를 입력해 로그인 할 수 있다. 이때 비밀번호는 보이지 않는다.
+- 아이디 또는 비밀번호가 틀릴  경우에는 틀렸다는 알림이 뜨도록 한다.
+- 아이디 또는 비밀번호 틀릴 경우 틀렸다는 알림이 뜬다.
+- 일반 유저가 로그인에 성공하면 스마일게이트 캐릭터가 통통 뛰고 있는 로그인 성공페이지로 이동한다.
+- 관리자가 로그인에 성공하면 관리자페이지로 이동한다.
+- 로그인에 성공하면 유저이름과 함께 환영문구가 뜨고 로그아웃 버튼이 생성된다.
+- 로그아웃 버튼 클릭시 로그아웃된다.
+
+
+**[관리자로 로그인 하는 방법]**
+
+`python manage.py makemigrations //   migrate`까지 과정 완료 후
+
+`python manage.py loaddata data.json`을 입력해 등록해둔 데이터를 불러온다.
+
+아이디 : admin , 비밀번호: 123으로 로그인하면 관리자로 로그인이 가능하다.
+
+[일반 유저가 로그인한 경우]
+
+![1](./assets/일반로그인.gif)
+
+[관리자가 로그인한 경우]
+
+![1](./assets/관리자로로그인.gif)
+
+
+
+### 2. 회원가입 기능
+
+* 입력해야하는 항목의 칸에 양식의 예시가 써져있다.
+* 양식에 맞지 않은 경우 해당 칸 하단에 경고문구가 뜬다.
+  * 유저의 아이디는 1자 이상 20자이하이다.
+  * 비밀번호는 8자 이상 16자 이하이다.
+  * 전화번호는 010으로 시작하는 11자리 숫자이다.
+  * 이메일은 @를 반드시 포함하는 메일주소 형식이다.
+* 양식에 맞게 작성할 경우 경고 문구가 사라진다.
+* 모든 경고문구가 사라지고 회원가입 버튼을 누르면 가입에 성공했다는 알림이 뜬다.
+* 알림이 뜬 후에는 로그인페이지로 이동한다.
+
+[회원가입]
+
+![1](./assets/회원가입.gif)
+
+
+
+### 3. 관리자 페이지
+
+* 관리자계정으로 로그인할 경우 모든 유저목록을 볼 수 있는 페이지로 이동한다.
+* 유저 아이디와 비밀번호, 이메일을 확인할 수 있다.
+* 관리자여부의 체크박스를 클릭하면 관리자로 지정할 수 있다.
+* 관리자여부의 체크박스를 클릭해 해제하면 관리자권한을 빼앗을 수 있다.
+
+![2](./assets/관리자변경하기.gif)
+
+
 
 
 
@@ -225,7 +209,7 @@ class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     username = models.CharField(default='', max_length=20, null=False, blank=False, unique=True)
     email = models.EmailField(default='', max_length=255, null=False, blank=False, unique=True)
-    phone = PhoneNumberField(default='', max_length=12, null=False, blank=False, unique=True)
+    phone = IntegerField(default=0, null=False, blank=False, unique=True)
     is_active = models.IntegerField(default=0)    
     is_admin = models.IntegerField(default=0)
     
@@ -266,7 +250,7 @@ class UserManager(BaseUserManager):
     # 관리자 user 생성
     def create_superuser(self, email, username, phone=None, password=None):
         if phone is None:
-            phone = '등록요함'
+            phone = 0
         user = self.create_user(
             email,
             password = password,
@@ -278,6 +262,18 @@ class UserManager(BaseUserManager):
         return user
 
 ```
+
+
+
+##### 🌹구현시 문제점
+
+1. 전화번호를 위한 field인 phoneNumberField가 읽히지 않았다.
+
+   django 의 phoneNumberField는 pip설치로 간단히 사용할 수 있음에도 해당 필드 사용시 정보를 추가하는 것에서 에러가 계속해서 발생했다. 이를 해결하기 위해 client에서 핸드폰 번호를 양식에 맞게 요청하도록 설정하였기에 백엔드 모델에서는 일반적인 숫자필드인 IntegerField를 사용하였다.
+
+2. Django에서 제공하는 User모델을 Custom하여 사용하는 것이 오히려 새로 만드는 것보다 어려웠다.
+
+   처음 백엔드를 하는만큼 기존에 제공되는 부분을 직접구현하거나 커스텀하여 사용해보는 것이 1차 목표였기에 유저테이블을 위한 모델을 기본 제공되는 User모델을 사용해 커스텀해보도록 하였다. 하지만 아예 필드를 지정해 새로 만드는 것이 더욱 편리했을 것으로 보인다. Django의 유저모델은 개인정보를 위한 테이블인만큼 보안관리와 형식에서 일반 모델과 다른 기능들이 내장되어있었고 이에 필드를 수정하거나 추가하기위해 커스텀을 할 경우 다양한 에러에 봉착하였다. "phone"이라는 전화번호 저장을 위한 필드를 추가해보면서 이러한 문제들을 해결해나갔다.
 
 
 
@@ -320,7 +316,12 @@ urlpatterns = [
 
 > views.py
 
-* ""에러메세지 세분화 생각해보기!
+* 통신에 성공하였지만 양식이 적합하지 않거나 오류가 있는 경우에는 200을 보내지만 에러사항을 담아서 보내주어야한다. 로그인의 경우 요청은 잘 왔으나 비밀번호가 다른 경우와같이 정보가 다른 경우에는 해당 문제를 보내준다.
+
+🌹구현시 문제점
+
+1. 비밀번호는 암호화되어 저장되기 때문에 비교를 위해서는 꼭 check_password를 사용해 확인해주어야만 한다!
+2. Json형태로 응답을 해주는 경우에는 원하는 메세지를 입력했을때 인코딩문제가 발생하기도한다. 이는 EmployeeEncoder로 json형식을 담은 변수를 인코딩하여 보내주면 된다.
 
 ```python
 from django.http.response import JsonResponse
@@ -330,13 +331,21 @@ from json import JSONEncoder
 def login(request):
     username = request.data.get('username')
     password = request.data.get('password')
-    user = get_object_or_404(get_user_model(), username=username)
-    context = {
-        'response': 'success',
-        'message': 'sucess login',
-        'user': user,
-        'token': jwt_create(username)
-    }
+    user = get_user_model().objects.get(username=username)
+    # 암호화된 비밀번호와 입력된 비밀번호가 같은지 확인해주고 같다면 성공메시지와 함께 토큰발급
+    if check_password(password, user.password):
+        context = {
+            'response': 'success',
+            'message': 'sucess login',
+            'user': user,
+            'token': jwt_create(username)
+        }
+    # 정보가 틀리다면 통신은 성공했으니 에러는 띄우지 않지만 실패메시지를 보낸다.
+    else:
+        context = {
+            'response': 'fail',
+            'message': "password doesn't match",
+        }
     return JsonResponse(EmployeeEncoder().encode(context), safe=False)
 
 def jwt_create(username):
@@ -359,36 +368,110 @@ class EmployeeEncoder(JSONEncoder):
 
 
 
+### 3. 회원가입 기능
+
+#### [프론트엔드]
+
+> Signup.vue
+
+* 회원가입은 사용자가 양식을 정확히 입력했는지, 틀렸다면 어느부분이 틀렸는지 파악할 수 있어야하기에 client부분에 많은 시간을 사용하였다.
+* 사용자가 정보를 입력할때마다 양식이 적합한지 확인해야만 양식에 맞는지 현상황을 파악할 수 있다. 따라서  변동사항을 지켜보고 있도록 구현했으며 위에 작성한 요구사항에 부합하기 전까지는 양식이 틀린 입력칸 하단에 경고문구가 뜨고 부합하면 경고문이 사라지도록 구현하였다.
+
+```javascript
+... 
+checkform() {
+      this.isSubmit = false;
+      // 아이디의 길이가 1자 이상, 20자 이하인가?
+      if (this.credentials.username.length <= 0 || this.credentials.username.length > 20) {
+        this.error.username = 'notValid';
+        return;
+      } else this.error.username = true;
+
+       // 비밀번호가 적합한가?
+      if (!this.passwordSchema.validate(this.credentials.password)) {
+        this.error.password = 'notValid';
+        return;
+      } else this.error.password = true;
+
+      // 비밀번호 확인
+      if (this.credentials.passwordConfirmation.length > 0 && this.credentials.password != this.credentials.passwordConfirmation) {
+        this.error.passwordConfirmation = 'notSame';
+        return;
+      } else this.error.passwordConfirmation = true;
+
+      // 이메일 형식이 맞는가?
+      if (!EmailValidator.validate(this.credentials.email)) {
+        this.error.email = 'styleError';
+        return;
+      }
+
+      // 이메일 길이가 1글자 이상, 255글자이하이다.
+      else if (this.credentials.email.length <= 0 || this.credentials.email.length >= 255) {
+        this.error.email = 'lengthError';
+        return;
+      } else this.error.email = true;
+
+      // 전화번호양식
+      if (this.credentials.phone.length != 11 || this.credentials.phone.slice(0, 3) != '010') {
+        this.error.phone = 'notValid';
+        return;
+      } else this.error.phone = true;
+
+      this.isSubmit = true;
+    },
+  },
+  // 입력 변수 감시
+  watch: {
+    'credentials.username': function() {
+      this.checkform();
+    },
+    'credentials.phone': function() {
+      this.checkform();
+    },
+    'credentials.email': function() {
+      this.checkform();
+    },
+    'credentials.password': function() {
+      this.checkform();
+    },
+    'credentials.passwordConfirmation': function() {
+      this.checkform();
+    },
+  },
+  created() {
+  // 패스워드 규칙. 최소 8자 ~ 최대 16자. 숫자와 문자 포함해야함.
+  this.passwordSchema
+    .is()
+    .min(8)
+    .is()
+    .max(16)
+    .has()
+    .digits()
+    .has()
+    .letters();
+  },
+```
 
 
 
-
-
-
-
+#### [백엔드]
 
 > views.py
 
+* 모든 양식을 갖추어 요청이 들어왔을때 이를 검토한다.
+* 모델을 직렬화한 형태에 해당 요청 데이터를 저장해주면 새로운 유저정보가 생성된다.
+
 ```python
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .serializers import UserSerializer
-
-
 @api_view(['POST'])
 def signup(request):
-	#1-1. Client에서 온 데이터를 받아서
+	# clietn 요청에서 data를 맏아 담아준다.
     password = request.data.get('password')
     password_confirmation = request.data.get('passwordConfirmation')
-		
-	#1-2. 패스워드 일치 여부 체크
+	# 비밀번호와 비밀번호 확인이 동일한지 체크 : 동일하지 않다면 400에러가 메세지와 함께 보내진다. (이미 client에서도 막음)
     if password != password_confirmation:
         return Response({'error': '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_400_BAD_REQUEST)
-		
-	#2. UserSerializer를 통해 데이터 직렬화
+	# UserSerializer로 데이터 직렬화
     serializer = UserSerializer(data=request.data)
-    
 	#3. validation 작업 진행 -> password도 같이 직렬화 진행
     if serializer.is_valid(raise_exception=True):
         user = serializer.save()
@@ -399,7 +482,7 @@ def signup(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 ```
 
-**[질문사항]**
+**❓[질문사항]**
 
 - 비밀번호입력값과 비밀번호확인입력값이 같음을 확인하는 경우 프론트와 백 둘다 처리해주는 것이 맞는지, 프론트에서만 처리해주는 것이 맞는지?
 
@@ -408,37 +491,12 @@ def signup(request):
   ```javascript
   // 비밀번호입력값 == 비밀번호확인값
         if (this.credentials.password == this.credentials.passwordConfirmation){
-          axios({
-            method: 'post',
-            url: 'http://127.0.0.1:8000/accounts/signup/',
-            data: this.credentials,
-          })
-            .then(res => {
-              console.log(res)
-              // this.$router.push({ name: 'Login' })
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        }else{
-          alert('입력하신 비밀번호와 비밀번호 확인값이 다릅니다.')
-        }// 비밀번호입력값 == 비밀번호확인값
-        if (this.credentials.password == this.credentials.passwordConfirmation){
-          axios({
-            method: 'post',
-            url: 'http://127.0.0.1:8000/accounts/signup/',
-            data: this.credentials,
-          })
-            .then(res => {
-              console.log(res)
-              // this.$router.push({ name: 'Login' })
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        }else{
-          alert('입력하신 비밀번호와 비밀번호 확인값이 다릅니다.')
+         .... 요청보내기
         }
+  // 비밀번호입력값 != 비밀번호확인값
+  	else{
+          alert('입력하신 비밀번호와 비밀번호 확인값이 다릅니다.')
+        }// 비밀번호입력값 == 비밀번호확인값        
   ```
 
   [백엔드에서 처리]
@@ -454,49 +512,13 @@ def signup(request):
   		
   ```
 
-> models.py
-
-> serializers.py
-
-```python
-from django.db.models import fields
-from rest_framework import serializers
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
-
-class UserSerializer(serializers.ModelSerializer):
-    # write_only : 시리얼라이징은 하지만 응답에는 포함시키지 않음
-    password = serializers.CharField(write_only=True)
-
-    class Meta:
-        model = User
-        fields = ('username', 'password')
-```
 
 
+## 느낀점 및 향후 도전 과제
 
-https://wisdom-990629.tistory.com/44
-
-https://wikidocs.net/10308
-
-https://hckcksrl.medium.com/django-%EC%BB%A4%EC%8A%A4%ED%85%80-%EC%9C%A0%EC%A0%80-%EB%AA%A8%EB%8D%B8-custom-user-model-b8487c0d150
-
-
-
-list error
-
-https://spoonhasi.tistory.com/2
-
-[참고] https://github.com/SSAFY-5th-seungwoon/Moya_backend
+처음으로 사용자 인증 부분에서 백엔드와 프론트엔드를 데이터베이스까지 활용해 직접구현해보았다. 일반적인 정보전달 페이지와는 다르게 사용자정보를 다루는 부분에서 어려운 부분들이 있었다.  백엔드를 처음 다루어보면서 기본적인 테이블 생성과 응답과정에서도 생각보다 많은 시간이 소요되었고 최대한 프레임워크의 내장기술을 적게 활용하기 위해 직접 JWT를 만들어보거나 원하는 형태로 크라이언트에 응답하기 위해 구현하는 부분 등 모든 부분이 어려웠지만 동시에 백엔드에서 어떠한 사항을 신경써야하고 어떠한 플로우로 흘러가는지를 조금이나마 이해할 수 있었다. 이후에는 시간상 직접 구현해보지 못한 "비밀번호 암호화(salt 활용), MSA, 이메일 인증" 을 백엔드까지 구현해보고싶다. 또한 사용자 데이터는 일정시간동안은 완전한 삭제보다는 비활성화시키고 다른 공간에 백업을 해둔다고 들었는데, 이를 위해 user model에 active 필드를 남겨둔만큼 database를 분리해 사용하는 부분도 도전해보고싶다.
 
 
 
 
-
-
-
-
-
-[참고]https://dora-guide.com/mysql-insert-update-delete/
 

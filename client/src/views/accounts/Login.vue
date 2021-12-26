@@ -84,6 +84,8 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          alert('아이디 또는 비밀번호를 다시 확인해 주세요.')
+
         })
     },
     getUsers: function(){

@@ -25,16 +25,6 @@ export default {
       users: this.$store.state.users,
     }
   },
-
-  methods: {
-  
-    
-  },
-  created: function () {
-
-  },
-  computed: {
-  }
 }
 </script>
 
